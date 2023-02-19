@@ -26,9 +26,9 @@
         clone: yes
 
     - name build app
-      command: mvn package
-      args:
-        chdir: /home/user1/boxfuse-sample-java-war-hello
+      shell:
+       cmd: "mvn -f pom.xml package"
+       chdir: /home/user1/
 
     - name: build war in master
       synchronize:
