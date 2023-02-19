@@ -9,31 +9,32 @@
       name: default-jdk
       state: present
 
-   - name: upd git
-     apt:
-     state: present
+    - name: upd git
+      apt:
+        name: git
+        state: present
 
-   - name: upd maven
-     apt:
-         name: maven
-         state: present
+    - name: upd maven
+      apt:
+        name: maven
+        state: present
 
-   - name: git clone
-     git:
-         repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-         dest: /home/user1
-         clone: yes
+    - name: git clone
+      git:
+        repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+        dest: /home/user1
+        clone: yes
 
-   - name build app
-     command: mvn package
-     args:
-       chdir: /home/user1/boxfuse-sample-java-war-hello
+    - name build app
+      command: mvn package
+      args:
+        chdir: /home/user1/boxfuse-sample-java-war-hello
 
-   - name: build war in master
-     synchronize:
-       mode: pull
-       src: /home/user1/boxfuse-sample-java-war-hello/target/hello-1.0.war
-       dest: /tmp/
+    - name: build war in master
+      synchronize:
+        mode: pull
+        src: /home/user1/boxfuse-sample-java-war-hello/target/hello-1.0.war
+        dest: /tmp/
 
 - name: for web
   hosts: web
@@ -45,13 +46,13 @@
       name: default-jdk
       state: present
 
-   - name: to web
-     apt:
-       name: tomcat9
-       state: present
+  - name: to web
+    apt:
+      name: tomcat9
+      state: present
 
-   - name: copy to prod
-       synchronize:
-         mode: push
-         src: /tmp/hello-1.0.war
-         dest: /var/lib/tomcat9/webapps
+  - name: copy to prod
+      synchronize:
+        mode: push
+        src: /tmp/hello-1.0.war
+        dest: /var/lib/tomcat9/webapps
