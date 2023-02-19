@@ -5,9 +5,9 @@
 
   tasks:
   - name: upd java
-   apt:
-       name: default-jdk
-       state: present
+    apt:
+      name: default-jdk
+      state: present
 
    - name: upd git
      apt:
