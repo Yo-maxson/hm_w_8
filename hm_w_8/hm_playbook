@@ -22,18 +22,18 @@
     - name: git clone
       git:
         repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-        dest: /home/user1
+        dest: /user1/boxfuse-sample-java-war-hello/
         clone: yes
 
     - name build app
       shell:
        cmd: "mvn -f pom.xml package"
-       chdir: /home/user1/
+       chdir: /user1/boxfuse-sample-java-war-hello/
 
     - name: build war in master
       synchronize:
         mode: pull
-        src: /home/user1/boxfuse-sample-java-war-hello/target/hello-1.0.war
+        src: /user1/boxfuse-sample-java-war-hello/target/hello-1.0.war
         dest: /tmp/
 
 - name: for web
